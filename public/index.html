@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f1220" />
+  <title>小智语音 · 网页版</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- 左侧：AI 列表 -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="brand-logo">智</div>
+        <div class="brand-text">
+          <strong>小智语音</strong>
+          <span>网页版 · 多角色</span>
+        </div>
+      </div>
+
+      <div class="sidebar-head">
+        <span>我的 AI</span>
+        <button class="icon-btn" id="add-ai" title="创建 AI" aria-label="创建 AI">＋</button>
+      </div>
+
+      <div class="ai-list" id="ai-list"></div>
+
+      <div class="sidebar-foot">
+        <div class="foot-actions">
+          <button class="ghost-btn" id="export-ais">⬆ 导出</button>
+          <button class="ghost-btn" id="import-ais">⬇ 导入</button>
+        </div>
+        <button class="ghost-btn" id="open-settings">⚙ 设置</button>
+      </div>
+    </aside>
+
+    <!-- 右侧：对话区 -->
+    <main class="main" id="main">
+      <header class="chat-header" id="chat-header">
+        <div class="avatar" id="chat-avatar">🤖</div>
+        <div class="chat-title">
+          <div class="chat-name" id="chat-name">选择一个 AI 开始</div>
+          <div class="chat-sub" id="chat-status">未连接</div>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn" id="edit-ai" title="编辑当前 AI" aria-label="编辑当前 AI">✎</button>
+          <button class="icon-btn danger" id="clear-chat" title="清空聊天记录" aria-label="清空聊天记录">🧹</button>
+        </div>
+      </header>
+
+      <div class="messages" id="messages">
+        <div class="empty-state" id="empty-state">
+          <div class="empty-icon">🎙️</div>
+          <h2>开始一段语音对话</h2>
+          <p>先在左侧创建一个 AI，按提示在小智控制台绑定设备，<br />然后点击下方的「开始对话」即可说话。</p>
+          <p class="dim">连续对话默认开启：说完一句后会自动继续聆听，只有你点「结束」、服务端关闭或网络异常才会断开。</p>
+        </div>
+      </div>
+
+      <div class="composer">
+        <div class="wave-row">
+          <canvas id="wave" width="600" height="44"></canvas>
+          <span class="wave-label" id="wave-label">待机</span>
+        </div>
+        <div class="controls">
+          <button class="talk-btn" id="talk-btn" disabled>
+            <span class="mic-icon">🎤</span>
+            <span id="talk-label">开始对话</span>
+          </button>
+          <button class="stop-btn" id="stop-btn" disabled>结束</button>
+        </div>
+        <div class="tip" id="tip">提示：点击「开始对话」后直接说话；通话中点一下按钮可打断；点「结束」收场。</div>
+      </div>
+    </main>
+  </div>
+
+  <!-- 导入备份文件 -->
+  <input type="file" id="import-file" accept=".json,application/json" hidden />
+
+  <!-- 弹窗挂载点 -->
+  <div id="modal-root"></div>
+  <div id="toast-root"></div>
+
+  <script type="module" src="./js/ui.js"></script>
+</body>
+</html>

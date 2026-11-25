@@ -1,0 +1,11 @@
+name = "xiaozhi-web-relay"
+main = "worker.js"
+compatibility_date = "2026-11-25"
+
+# 网页静态文件 + Worker 中转放在同一个 Worker 里，部署一次即可。
+[assets]
+directory = "./public/"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
+# 只让 Worker 接管 API 和 WebSocket，其余静态文件走 CDN 缓存
+run_worker_first = ["/api/*", "/ws"]
